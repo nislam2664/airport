@@ -7,18 +7,18 @@ public class Passenger {
     private String firstName;
     private String lastName;
     private int passportNo;
-    private int confirmationNo;
+    private Reservation reservation;
 
     public Passenger() {
 
     }
 
-    public Passenger(int id, String firstName, String lastName, int passportNo, int confirmationNo) {
+    public Passenger(int id, String firstName, String lastName, int passportNo, Reservation reservation) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.passportNo = passportNo;
-        this.confirmationNo = confirmationNo;
+        this.reservation = reservation;
     }
 
     public int getId() {
@@ -37,8 +37,8 @@ public class Passenger {
         return passportNo;
     }
 
-    public int getConfirmationNo() {
-        return confirmationNo;
+    public Reservation getReservation() {
+        return reservation;
     }
 
     public void setId(int id) {
@@ -57,8 +57,8 @@ public class Passenger {
         this.passportNo = passportNo;
     }
 
-    public void setConfirmationNo(int confirmationNo) {
-        this.confirmationNo = confirmationNo;
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 
     @Override
@@ -66,12 +66,12 @@ public class Passenger {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Passenger passenger = (Passenger) o;
-        return id == passenger.id && passportNo == passenger.passportNo && confirmationNo == passenger.confirmationNo && Objects.equals(firstName, passenger.firstName) && Objects.equals(lastName, passenger.lastName);
+        return id == passenger.id && passportNo == passenger.passportNo && Objects.equals(firstName, passenger.firstName) && Objects.equals(lastName, passenger.lastName) && Objects.equals(reservation, passenger.reservation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, passportNo, confirmationNo);
+        return Objects.hash(id, firstName, lastName, passportNo, reservation);
     }
 
     @Override
@@ -81,7 +81,8 @@ public class Passenger {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", passportNo=" + passportNo +
-                ", confirmationNo=" + confirmationNo +
+                ", reservation=" + reservation +
                 '}';
     }
 }
+

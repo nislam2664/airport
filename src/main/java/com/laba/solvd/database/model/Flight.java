@@ -1,40 +1,41 @@
 package com.laba.solvd.database.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Flight {
     private int id;
-    private int routeId;
-    private int airplaneId;
+    private Route route;
+    private Airplane airplane;
     private LocalDate dateLog;
     private String flightStatus;
 
-    private final ArrayList<Reservation> reservations = new ArrayList<>();
+    private List<Reservation> reservations;
 
     public Flight() {
 
     }
 
-    public Flight(int id, int routeId, int airplaneId, LocalDate dateLog, String flightStatus) {
+    public Flight(int id, Route route, Airplane airplane, LocalDate dateLog, String flightStatus, List<Reservation> reservations) {
         this.id = id;
-        this.routeId = routeId;
-        this.airplaneId = airplaneId;
+        this.route = route;
+        this.airplane = airplane;
         this.dateLog = dateLog;
         this.flightStatus = flightStatus;
+        this.reservations = reservations;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getRouteId() {
-        return routeId;
+    public Route getRoute() {
+        return route;
     }
 
-    public int getAirplaneId() {
-        return airplaneId;
+    public Airplane getAirplane() {
+        return airplane;
     }
 
     public LocalDate getDateLog() {
@@ -45,7 +46,7 @@ public class Flight {
         return flightStatus;
     }
 
-    public ArrayList<Reservation> getReservations() {
+    public List<Reservation> getReservations() {
         return reservations;
     }
 
@@ -53,12 +54,12 @@ public class Flight {
         this.id = id;
     }
 
-    public void setRouteId(int routeId) {
-        this.routeId = routeId;
+    public void setRoute(Route route) {
+        this.route = route;
     }
 
-    public void setAirplaneId(int airplaneId) {
-        this.airplaneId = airplaneId;
+    public void setAirplane(Airplane airplane) {
+        this.airplane = airplane;
     }
 
     public void setDateLog(LocalDate dateLog) {
@@ -69,25 +70,29 @@ public class Flight {
         this.flightStatus = flightStatus;
     }
 
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Flight flight = (Flight) o;
-        return id == flight.id && routeId == flight.routeId && airplaneId == flight.airplaneId && Objects.equals(dateLog, flight.dateLog) && Objects.equals(flightStatus, flight.flightStatus) && Objects.equals(reservations, flight.reservations);
+        return id == flight.id && Objects.equals(route, flight.route) && Objects.equals(airplane, flight.airplane) && Objects.equals(dateLog, flight.dateLog) && Objects.equals(flightStatus, flight.flightStatus) && Objects.equals(reservations, flight.reservations);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, routeId, airplaneId, dateLog, flightStatus, reservations);
+        return Objects.hash(id, route, airplane, dateLog, flightStatus, reservations);
     }
 
     @Override
     public String toString() {
         return "Flight{" +
                 "id=" + id +
-                ", routeId=" + routeId +
-                ", airplaneId=" + airplaneId +
+                ", route=" + route +
+                ", airplane=" + airplane +
                 ", dateLog=" + dateLog +
                 ", flightStatus='" + flightStatus + '\'' +
                 ", reservations=" + reservations +

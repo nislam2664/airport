@@ -1,33 +1,34 @@
 package com.laba.solvd.database.model;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Reservation {
     private int id;
-    private int flightNo;
+    private Flight flight;
     private String seatNo;
     private float price;
 
-    private final ArrayList<Passenger> passengers = new ArrayList<>();
+    private List<Passenger> passengers;
 
     public Reservation() {
 
     }
 
-    public Reservation(int id, int flightNo, String seatNo, float price) {
+    public Reservation(int id, Flight flight, String seatNo, float price, List<Passenger> passengers) {
         this.id = id;
-        this.flightNo = flightNo;
+        this.flight = flight;
         this.seatNo = seatNo;
         this.price = price;
+        this.passengers = passengers;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getFlightNo() {
-        return flightNo;
+    public Flight getFlight() {
+        return flight;
     }
 
     public String getSeatNo() {
@@ -38,7 +39,7 @@ public class Reservation {
         return price;
     }
 
-    public ArrayList<Passenger> getPassengers() {
+    public List<Passenger> getPassengers() {
         return passengers;
     }
 
@@ -46,8 +47,8 @@ public class Reservation {
         this.id = id;
     }
 
-    public void setFlightNo(int flightNo) {
-        this.flightNo = flightNo;
+    public void setFlight(Flight flight) {
+        this.flight = flight;
     }
 
     public void setSeatNo(String seatNo) {
@@ -58,24 +59,28 @@ public class Reservation {
         this.price = price;
     }
 
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reservation that = (Reservation) o;
-        return id == that.id && flightNo == that.flightNo && Float.compare(that.price, price) == 0 && Objects.equals(seatNo, that.seatNo) && Objects.equals(passengers, that.passengers);
+        return id == that.id && Float.compare(that.price, price) == 0 && Objects.equals(flight, that.flight) && Objects.equals(seatNo, that.seatNo) && Objects.equals(passengers, that.passengers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, flightNo, seatNo, price, passengers);
+        return Objects.hash(id, flight, seatNo, price, passengers);
     }
 
     @Override
     public String toString() {
         return "Reservation{" +
                 "id=" + id +
-                ", flightNo=" + flightNo +
+                ", flight=" + flight +
                 ", seatNo='" + seatNo + '\'' +
                 ", price=" + price +
                 ", passengers=" + passengers +

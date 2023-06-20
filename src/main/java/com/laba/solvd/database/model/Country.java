@@ -1,6 +1,6 @@
 package com.laba.solvd.database.model;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Country {
@@ -8,16 +8,17 @@ public class Country {
     private String code;
     private String name;
 
-    private final ArrayList<Airport> airports = new ArrayList<>();
+    private List<Airport> airports;
 
     public Country() {
 
     }
 
-    public Country(int id, String code, String name) {
+    public Country(int id, String code, String name, List<Airport> airports) {
         this.id = id;
         this.code = code;
         this.name = name;
+        this.airports = airports;
     }
 
     public int getId() {
@@ -32,7 +33,7 @@ public class Country {
         return name;
     }
 
-    public ArrayList<Airport> getAirports() {
+    public List<Airport> getAirports() {
         return airports;
     }
 
@@ -46,6 +47,10 @@ public class Country {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setAirports(List<Airport> airports) {
+        this.airports = airports;
     }
 
     @Override

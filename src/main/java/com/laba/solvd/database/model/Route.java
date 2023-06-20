@@ -1,39 +1,40 @@
 package com.laba.solvd.database.model;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Route {
     private int id;
-    private int fromAirport;
-    private int toAirport;
+    private Airport fromAirport;
+    private Airport toAirport;
     private LocalTime departure;
     private LocalTime arrival;
 
-    private final ArrayList<Flight> flights = new ArrayList<>();
+    private List<Flight> flights;
 
     public Route() {
 
     }
 
-    public Route(int id, int fromAirport, int toAirport, LocalTime departure, LocalTime arrival) {
+    public Route(int id, Airport fromAirport, Airport toAirport, LocalTime departure, LocalTime arrival, List<Flight> flights) {
         this.id = id;
         this.fromAirport = fromAirport;
         this.toAirport = toAirport;
         this.departure = departure;
         this.arrival = arrival;
+        this.flights = flights;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getFromAirport() {
+    public Airport getFromAirport() {
         return fromAirport;
     }
 
-    public int getToAirport() {
+    public Airport getToAirport() {
         return toAirport;
     }
 
@@ -45,7 +46,7 @@ public class Route {
         return arrival;
     }
 
-    public ArrayList<Flight> getFlights() {
+    public List<Flight> getFlights() {
         return flights;
     }
 
@@ -53,11 +54,11 @@ public class Route {
         this.id = id;
     }
 
-    public void setFromAirport(int fromAirport) {
+    public void setFromAirport(Airport fromAirport) {
         this.fromAirport = fromAirport;
     }
 
-    public void setToAirport(int toAirport) {
+    public void setToAirport(Airport toAirport) {
         this.toAirport = toAirport;
     }
 
@@ -69,12 +70,16 @@ public class Route {
         this.arrival = arrival;
     }
 
+    public void setFlights(List<Flight> flights) {
+        this.flights = flights;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Route route = (Route) o;
-        return id == route.id && fromAirport == route.fromAirport && toAirport == route.toAirport && Objects.equals(departure, route.departure) && Objects.equals(arrival, route.arrival) && Objects.equals(flights, route.flights);
+        return id == route.id && Objects.equals(fromAirport, route.fromAirport) && Objects.equals(toAirport, route.toAirport) && Objects.equals(departure, route.departure) && Objects.equals(arrival, route.arrival) && Objects.equals(flights, route.flights);
     }
 
     @Override

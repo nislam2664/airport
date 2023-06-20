@@ -6,17 +6,15 @@ public class Employee {
     private int id;
     private String firstName;
     private String lastName;
-    private int airplaneId;
 
     public Employee() {
 
     }
 
-    public Employee(int id, String firstName, String lastName, int airplaneId) {
+    public Employee(int id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.airplaneId = airplaneId;
     }
 
     public int getId() {
@@ -31,10 +29,6 @@ public class Employee {
         return lastName;
     }
 
-    public int getAirplaneId() {
-        return airplaneId;
-    }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -47,21 +41,17 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public void setAirplaneId(int airplaneId) {
-        this.airplaneId = airplaneId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return id == employee.id && airplaneId == employee.airplaneId && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName);
+        return id == employee.id && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, airplaneId);
+        return Objects.hash(id, firstName, lastName);
     }
 
     @Override
@@ -70,7 +60,6 @@ public class Employee {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", airplaneId=" + airplaneId +
                 '}';
     }
 }

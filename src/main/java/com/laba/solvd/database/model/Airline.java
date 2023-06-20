@@ -1,38 +1,39 @@
 package com.laba.solvd.database.model;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Airline {
     private int id;
-    private String name;
     private String code;
+    private String name;
 
-    private final ArrayList<Airplane> airplanes = new ArrayList<>();
+    private List<Airplane> airplanes;
 
     public Airline() {
 
     }
 
-    public Airline(int id, String name, String code) {
+    public Airline(int id, String code, String name, List<Airplane> airplanes) {
         this.id = id;
-        this.name = name;
         this.code = code;
+        this.name = name;
+        this.airplanes = airplanes;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public String getCode() {
         return code;
     }
 
-    public ArrayList<Airplane> getAirplanes() {
+    public String getName() {
+        return name;
+    }
+
+    public List<Airplane> getAirplanes() {
         return airplanes;
     }
 
@@ -40,12 +41,16 @@ public class Airline {
         this.id = id;
     }
 
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setAirplanes(List<Airplane> airplanes) {
+        this.airplanes = airplanes;
     }
 
     @Override
@@ -53,20 +58,20 @@ public class Airline {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Airline airline = (Airline) o;
-        return id == airline.id && Objects.equals(name, airline.name) && Objects.equals(code, airline.code) && Objects.equals(airplanes, airline.airplanes);
+        return id == airline.id && Objects.equals(code, airline.code) && Objects.equals(name, airline.name) && Objects.equals(airplanes, airline.airplanes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, code, airplanes);
+        return Objects.hash(id, code, name, airplanes);
     }
 
     @Override
     public String toString() {
         return "Airline{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
                 ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
                 ", airplanes=" + airplanes +
                 '}';
     }

@@ -1,14 +1,11 @@
 package com.laba.solvd.database.model;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class AirplaneType {
     private int id;
     private String brand;
     private String model;
-
-    private final ArrayList<Airplane> airplanes = new ArrayList<>();
 
     public AirplaneType() {
 
@@ -32,10 +29,6 @@ public class AirplaneType {
         return model;
     }
 
-    public ArrayList<Airplane> getAirplanes() {
-        return airplanes;
-    }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -53,12 +46,12 @@ public class AirplaneType {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AirplaneType that = (AirplaneType) o;
-        return id == that.id && Objects.equals(brand, that.brand) && Objects.equals(model, that.model) && Objects.equals(airplanes, that.airplanes);
+        return id == that.id && Objects.equals(brand, that.brand) && Objects.equals(model, that.model);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, brand, model, airplanes);
+        return Objects.hash(id, brand, model);
     }
 
     @Override
@@ -67,7 +60,6 @@ public class AirplaneType {
                 "id=" + id +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
-                ", airplanes=" + airplanes +
                 '}';
     }
 }
