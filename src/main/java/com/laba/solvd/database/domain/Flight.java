@@ -1,4 +1,4 @@
-package com.laba.solvd.database.model;
+package com.laba.solvd.database.domain;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,13 +17,12 @@ public class Flight {
 
     }
 
-    public Flight(int id, Route route, Airplane airplane, LocalDate dateLog, String flightStatus, List<Reservation> reservations) {
+    public Flight(int id, Route route, Airplane airplane, LocalDate dateLog, String flightStatus) {
         this.id = id;
         this.route = route;
         this.airplane = airplane;
         this.dateLog = dateLog;
         this.flightStatus = flightStatus;
-        this.reservations = reservations;
     }
 
     public int getId() {

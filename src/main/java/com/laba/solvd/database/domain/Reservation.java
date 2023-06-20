@@ -1,4 +1,4 @@
-package com.laba.solvd.database.model;
+package com.laba.solvd.database.domain;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,12 +15,11 @@ public class Reservation {
 
     }
 
-    public Reservation(int id, Flight flight, String seatNo, float price, List<Passenger> passengers) {
+    public Reservation(int id, Flight flight, String seatNo, float price) {
         this.id = id;
         this.flight = flight;
         this.seatNo = seatNo;
         this.price = price;
-        this.passengers = passengers;
     }
 
     public int getId() {

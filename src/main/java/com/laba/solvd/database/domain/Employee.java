@@ -1,4 +1,4 @@
-package com.laba.solvd.database.model;
+package com.laba.solvd.database.domain;
 
 import java.util.Objects;
 
@@ -29,7 +29,7 @@ public class Employee {
         return lastName;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

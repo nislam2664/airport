@@ -1,4 +1,4 @@
-package com.laba.solvd.database.model;
+package com.laba.solvd.database.domain;
 
 import java.time.LocalDate;
 import java.util.Objects;

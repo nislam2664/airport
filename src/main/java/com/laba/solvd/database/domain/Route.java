@@ -1,4 +1,4 @@
-package com.laba.solvd.database.model;
+package com.laba.solvd.database.domain;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -17,13 +17,12 @@ public class Route {
 
     }
 
-    public Route(int id, Airport fromAirport, Airport toAirport, LocalTime departure, LocalTime arrival, List<Flight> flights) {
+    public Route(int id, Airport fromAirport, Airport toAirport, LocalTime departure, LocalTime arrival) {
         this.id = id;
         this.fromAirport = fromAirport;
         this.toAirport = toAirport;
         this.departure = departure;
         this.arrival = arrival;
-        this.flights = flights;
     }
 
     public int getId() {

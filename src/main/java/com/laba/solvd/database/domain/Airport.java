@@ -1,4 +1,4 @@
-package com.laba.solvd.database.model;
+package com.laba.solvd.database.domain;
 
 import java.util.List;
 import java.util.Objects;
@@ -16,13 +16,12 @@ public class Airport {
 
     }
 
-    public Airport(int id, String code, String name, float longitude, float latitude, List<Route> routes) {
+    public Airport(int id, String code, String name, float longitude, float latitude) {
         this.id = id;
         this.code = code;
         this.name = name;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.routes = routes;
     }
 
     public int getId() {
@@ -49,7 +48,7 @@ public class Airport {
         return routes;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,24 +1,23 @@
-package com.laba.solvd.database.model;
+package com.laba.solvd.database.domain;
 
 import java.util.List;
 import java.util.Objects;
 
-public class Airline {
+public class Country {
     private int id;
     private String code;
     private String name;
 
-    private List<Airplane> airplanes;
+    private List<Airport> airports;
 
-    public Airline() {
+    public Country() {
 
     }
 
-    public Airline(int id, String code, String name, List<Airplane> airplanes) {
+    public Country(int id, String code, String name) {
         this.id = id;
         this.code = code;
         this.name = name;
-        this.airplanes = airplanes;
     }
 
     public int getId() {
@@ -33,8 +32,8 @@ public class Airline {
         return name;
     }
 
-    public List<Airplane> getAirplanes() {
-        return airplanes;
+    public List<Airport> getAirports() {
+        return airports;
     }
 
     public void setId(int id) {
@@ -49,30 +48,30 @@ public class Airline {
         this.name = name;
     }
 
-    public void setAirplanes(List<Airplane> airplanes) {
-        this.airplanes = airplanes;
+    public void setAirports(List<Airport> airports) {
+        this.airports = airports;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Airline airline = (Airline) o;
-        return id == airline.id && Objects.equals(code, airline.code) && Objects.equals(name, airline.name) && Objects.equals(airplanes, airline.airplanes);
+        Country country = (Country) o;
+        return id == country.id && Objects.equals(code, country.code) && Objects.equals(name, country.name) && Objects.equals(airports, country.airports);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, code, name, airplanes);
+        return Objects.hash(id, code, name, airports);
     }
 
     @Override
     public String toString() {
-        return "Airline{" +
+        return "Country{" +
                 "id=" + id +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
-                ", airplanes=" + airplanes +
+                ", airports=" + airports +
                 '}';
     }
 }

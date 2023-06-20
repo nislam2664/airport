@@ -37,6 +37,4 @@ public enum Config {
     public String getValue() {
         return properties.getProperty(key, value);
     }
-
-
 }

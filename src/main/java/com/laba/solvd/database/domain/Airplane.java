@@ -1,4 +1,4 @@
-package com.laba.solvd.database.model;
+package com.laba.solvd.database.domain;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,14 +17,11 @@ public class Airplane {
 
     }
 
-    public Airplane(int id, Airline airline, AirplaneType type, int capacity, List<Package> packages, List<Employee> employees, List<Flight> flights) {
+    public Airplane(int id, Airline airline, AirplaneType type, int capacity) {
         this.id = id;
         this.airline = airline;
         this.type = type;
         this.capacity = capacity;
-        this.packages = packages;
-        this.employees = employees;
-        this.flights = flights;
     }
 
     public int getId() {

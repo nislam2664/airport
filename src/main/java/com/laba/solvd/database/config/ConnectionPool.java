@@ -35,8 +35,6 @@ public class ConnectionPool {
     }
 
     public static ConnectionPool getInstance() {
-        if (INSTANCE == null)
-            INSTANCE = new ConnectionPool();
         return INSTANCE;
     }
 

@@ -1,24 +1,23 @@
-package com.laba.solvd.database.model;
+package com.laba.solvd.database.domain;
 
 import java.util.List;
 import java.util.Objects;
 
-public class Country {
+public class Airline {
     private int id;
     private String code;
     private String name;
 
-    private List<Airport> airports;
+    private List<Airplane> airplanes;
 
-    public Country() {
+    public Airline() {
 
     }
 
-    public Country(int id, String code, String name, List<Airport> airports) {
+    public Airline(int id, String code, String name) {
         this.id = id;
         this.code = code;
         this.name = name;
-        this.airports = airports;
     }
 
     public int getId() {
@@ -33,8 +32,8 @@ public class Country {
         return name;
     }
 
-    public List<Airport> getAirports() {
-        return airports;
+    public List<Airplane> getAirplanes() {
+        return airplanes;
     }
 
     public void setId(int id) {
@@ -49,30 +48,30 @@ public class Country {
         this.name = name;
     }
 
-    public void setAirports(List<Airport> airports) {
-        this.airports = airports;
+    public void setAirplanes(List<Airplane> airplanes) {
+        this.airplanes = airplanes;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Country country = (Country) o;
-        return id == country.id && Objects.equals(code, country.code) && Objects.equals(name, country.name) && Objects.equals(airports, country.airports);
+        Airline airline = (Airline) o;
+        return id == airline.id && Objects.equals(code, airline.code) && Objects.equals(name, airline.name) && Objects.equals(airplanes, airline.airplanes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, code, name, airports);
+        return Objects.hash(id, code, name, airplanes);
     }
 
     @Override
     public String toString() {
-        return "Country{" +
+        return "Airline{" +
                 "id=" + id +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
-                ", airports=" + airports +
+                ", airplanes=" + airplanes +
                 '}';
     }
 }
