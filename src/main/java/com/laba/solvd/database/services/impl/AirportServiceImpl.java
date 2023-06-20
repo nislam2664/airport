@@ -34,6 +34,6 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     public List<Airport> getAll() {
-        return null;
+        return airportRepository.getAll();
     }
 }
