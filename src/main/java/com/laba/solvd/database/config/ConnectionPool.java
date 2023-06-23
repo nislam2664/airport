@@ -34,14 +34,12 @@ public class ConnectionPool {
         username = Config.USERNAME.getValue();
         password = Config.PASSWORD.getValue();
         poolSize = Integer.parseInt(Config.POOL_SIZE.getValue());
-        System.out.println(poolSize);
 
-        //INSTANCE = new ConnectionPool();
         connectionPool = new ArrayList<>(poolSize);
         IntStream.range(0, poolSize).boxed().forEach((i -> connectionPool.add(createConnection())));
     }
 
-    public static ConnectionPool getInstance() {
+    public static synchronized ConnectionPool getInstance() {
         if (INSTANCE == null)
             INSTANCE = new ConnectionPool();
         return INSTANCE;
