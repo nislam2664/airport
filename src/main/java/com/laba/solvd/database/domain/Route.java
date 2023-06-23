@@ -1,6 +1,7 @@
 package com.laba.solvd.database.domain;
 
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Objects;
 
 public class Route {
@@ -9,6 +10,8 @@ public class Route {
     private Airport toAirport;
     private LocalTime departure;
     private LocalTime arrival;
+
+    private List<Flight> flights;
 
     public Route() {
 
@@ -42,6 +45,10 @@ public class Route {
         return arrival;
     }
 
+    public List<Flight> getFlights() {
+        return flights;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -60,6 +67,10 @@ public class Route {
 
     public void setArrival(LocalTime arrival) {
         this.arrival = arrival;
+    }
+
+    public void setFlights(List<Flight> flights) {
+        this.flights = flights;
     }
 
     @Override
