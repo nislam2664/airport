@@ -36,7 +36,7 @@ public class ConnectionPool {
         poolSize = Integer.parseInt(Config.POOL_SIZE.getValue());
         System.out.println(poolSize);
 
-        INSTANCE = new ConnectionPool();
+        //INSTANCE = new ConnectionPool();
         connectionPool = new ArrayList<>(poolSize);
         IntStream.range(0, poolSize).boxed().forEach((i -> connectionPool.add(createConnection())));
     }
