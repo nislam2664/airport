@@ -1,7 +1,9 @@
 package com.laba.solvd.database.persistence.impl;
 
 import com.laba.solvd.database.config.ConnectionPool;
+import com.laba.solvd.database.domain.Airplane;
 import com.laba.solvd.database.domain.AirplaneType;
+import com.laba.solvd.database.persistence.AirplaneTypeRepository;
 import com.laba.solvd.database.persistence.DaoRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +12,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AirplaneTypeRepositoryImpl implements DaoRepository<AirplaneType> {
+public class AirplaneTypeRepositoryImpl implements AirplaneTypeRepository {
     private static final Logger logger = LogManager.getLogger(AirplaneTypeRepositoryImpl.class.getName());
 
     private String CREATE = "INSERT INTO airplane_types (brand, model) VALUES (?, ?)";
@@ -19,8 +21,9 @@ public class AirplaneTypeRepositoryImpl implements DaoRepository<AirplaneType> {
     private String READ = "SELECT id, brand, model FROM airplane_types WHERE id = ?";
     private String GET_ALL = "SELECT id, brand, model FROM airplane_types";
 
-    private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
+    private String SET_TYPE = "INSERT INTO airplane_types (id, airplane_id) VALUES (?, ?)";
 
+    private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
 
     @Override
     public void create(AirplaneType airplaneType) {
@@ -115,6 +118,21 @@ public class AirplaneTypeRepositoryImpl implements DaoRepository<AirplaneType> {
         }
 
         return airplaneTypes;
+    }
+
+    @Override
+    public void setAirplaneType(AirplaneType airplaneType, Airplane airplane) {
+        Connection connection = CONNECTION_POOL.getConnection();
+
+        try (PreparedStatement ps = connection.prepareStatement(SET_TYPE, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, airplaneType.getId());
+            ps.setInt(2, airplane.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.warn("Unable to set airplane type" , e);
+        } finally {
+            CONNECTION_POOL.releaseConnection(connection);
+        }
     }
 
     public static AirplaneType findById(Integer id, List<AirplaneType> airplaneTypes) {

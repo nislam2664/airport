@@ -1,8 +1,9 @@
 package com.laba.solvd.database.persistence.impl;
 
 import com.laba.solvd.database.config.ConnectionPool;
-import com.laba.solvd.database.persistence.DaoRepository;
+import com.laba.solvd.database.domain.Airplane;
 import com.laba.solvd.database.domain.Package;
+import com.laba.solvd.database.persistence.PackageRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PackageRepositoryImpl implements DaoRepository<Package> {
+public class PackageRepositoryImpl implements PackageRepository {
     private static final Logger logger = LogManager.getLogger(PackageRepositoryImpl.class.getName());
 
     private String CREATE = "INSERT INTO packages (name, address) VALUES (?, ?)";
@@ -18,6 +19,8 @@ public class PackageRepositoryImpl implements DaoRepository<Package> {
     private String DELETE = "DELETE FROM packages WHERE id = ?";
     private String READ = "SELECT id, name, address FROM packages WHERE id = ?";
     private String GET_ALL = "SELECT id, name, address FROM packages";
+
+    private String SET_PACKAGE = "INSERT INTO packages (id, airplane_id) VALUES (?, ?)";
 
     private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
 
@@ -114,6 +117,21 @@ public class PackageRepositoryImpl implements DaoRepository<Package> {
         }
 
         return packages;
+    }
+
+    @Override
+    public void setPackage(Package aPackage, Airplane airplane) {
+        Connection connection = CONNECTION_POOL.getConnection();
+
+        try (PreparedStatement ps = connection.prepareStatement(SET_PACKAGE, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, aPackage.getId());
+            ps.setInt(2, airplane.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.warn("Unable to set package" , e);
+        } finally {
+            CONNECTION_POOL.releaseConnection(connection);
+        }
     }
 
     public static Package findById(Integer id, List<Package> packages) {
