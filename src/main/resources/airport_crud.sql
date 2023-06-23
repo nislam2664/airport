@@ -32,38 +32,38 @@ INSERT INTO airplanes VALUES (8, 1, 0, 5);
 INSERT INTO airplanes VALUES (9, 77, 0, 7);
 INSERT INTO airplanes VALUES (10, 43, 0, 2);
 
-INSERT INTO countries VALUES (1, "USA", "United States");
-INSERT INTO countries VALUES (45, "DNK", "Denmark");
-INSERT INTO countries VALUES (20, "EGY", "Egypt");
-INSERT INTO countries VALUES (375, "BLR", "Belarus");
-INSERT INTO countries VALUES (44, "GBR", "United Kingdom");
-INSERT INTO countries VALUES (248, "SYC", "Seychelles");
-INSERT INTO countries VALUES (66, "THA", "Thailand");
-INSERT INTO countries VALUES (974, "QAT", "Qatar");
-INSERT INTO countries VALUES (52, "MEX", "Mexico");
-INSERT INTO countries VALUES (81, "JPN", "Japan");
+INSERT INTO countries VALUES (1, "United States", "USA");
+INSERT INTO countries VALUES (45, "Denmark", "DNK");
+INSERT INTO countries VALUES (20, "Egypt", "EGY");
+INSERT INTO countries VALUES (375, "Belarus", "BLR");
+INSERT INTO countries VALUES (44, "United Kingdom", "GBR");
+INSERT INTO countries VALUES (248, "Seychelles", "SYC");
+INSERT INTO countries VALUES (66, "Thailand", "THA");
+INSERT INTO countries VALUES (974, "Qatar", "QAT");
+INSERT INTO countries VALUES (52, "Mexico", "MEX");
+INSERT INTO countries VALUES (81, "Japan", "JPN");
 
-INSERT INTO airports VALUES (1, "JFK", "John F. Kennedy Airport", 1, 40.6434, -73.7890);
-INSERT INTO airports VALUES (2, "CPH", "Copenhagen Airport", 45, 55.6121, 12.6477);
-INSERT INTO airports VALUES (3, "CAI", "Cairo International Airport", 20, 30.1119, 31.4007);
-INSERT INTO airports VALUES (4, "MSQ", "Minsk National Airport", 375, 53.8897, 28.0342);
-INSERT INTO airports VALUES (5, "LGW", "London Gatwick Airport", 44, 51.1537, -0.1821);
-INSERT INTO airports VALUES (6, "SEZ", "Seychelles International Airport", 248, -4.6709, 55.5115);
-INSERT INTO airports VALUES (7, "BKK", "Suvarnabhumi Airport", 66, 13.6918, 100.7500);
-INSERT INTO airports VALUES (8, "DOH", "Hamad International Airport", 974, 25.2598, 51.6143);
-INSERT INTO airports VALUES (9, "NLU", "Felipe Angeles International Airport", 52, 19.7353, -99.0265);
-INSERT INTO airports VALUES (10, "OKA", "Naha Airport", 81, 24.2064, 127.6465);
+INSERT INTO airports VALUES (1, "John F. Kennedy Airport", "JFK", 1, 40.6434, -73.7890);
+INSERT INTO airports VALUES (2, "Copenhagen Airport", "CPH", 45, 55.6121, 12.6477);
+INSERT INTO airports VALUES (3, "Cairo International Airport", "CAI", 20, 30.1119, 31.4007);
+INSERT INTO airports VALUES (4, "Minsk National Airport", "MSQ", 375, 53.8897, 28.0342);
+INSERT INTO airports VALUES (5, "London Gatwick Airport", "LGW", 44, 51.1537, -0.1821);
+INSERT INTO airports VALUES (6, "Seychelles International Airport", "SEZ", 248, -4.6709, 55.5115);
+INSERT INTO airports VALUES (7, "Suvarnabhumi Airport", "BKK", 66, 13.6918, 100.7500);
+INSERT INTO airports VALUES (8, "Hamad International Airport", "DOH", 974, 25.2598, 51.6143);
+INSERT INTO airports VALUES (9, "Felipe Angeles International Airport", "NLU", 52, 19.7353, -99.0265);
+INSERT INTO airports VALUES (10, "Naha Airport", "OKA", 81, 24.2064, 127.6465);
 
-INSERT INTO licenses VALUES (1, 12345678, "1999-09-01", "2019-09-22");
-INSERT INTO licenses VALUES (2, 87654321, "1992-04-17", "2026-09-11");
-INSERT INTO licenses VALUES (3, 32987127, "1995-04-05", "2029-09-19");
-INSERT INTO licenses VALUES (4, 51215151, "2019-07-23", "2022-10-01");
-INSERT INTO licenses VALUES (5, 91823791, "1990-01-15", "2023-01-17");
-INSERT INTO licenses VALUES (6, 90347678, "2021-11-05", "2024-02-25");
-INSERT INTO licenses VALUES (7, 76213543, "2003-08-08", "2025-03-29");
-INSERT INTO licenses VALUES (8, 42783142, "1996-09-19", "2026-07-04");
-INSERT INTO licenses VALUES (9, 52167430, "1998-08-27", "2027-06-05");
-INSERT INTO licenses VALUES (10, 69128341, "1996-12-25", "2026-08-15");
+INSERT INTO licenses VALUES (1, 12345678, "1999-09-01", "2019-09-22", 1);
+INSERT INTO licenses VALUES (2, 87654321, "1992-04-17", "2026-09-11", 2);
+INSERT INTO licenses VALUES (3, 32987127, "1995-04-05", "2029-09-19", 3);
+INSERT INTO licenses VALUES (4, 51215151, "2019-07-23", "2022-10-01", 4);
+INSERT INTO licenses VALUES (5, 91823791, "1990-01-15", "2023-01-17", 5);
+INSERT INTO licenses VALUES (6, 90347678, "2021-11-05", "2024-02-25", 6);
+INSERT INTO licenses VALUES (7, 76213543, "2003-08-08", "2025-03-29", 7);
+INSERT INTO licenses VALUES (8, 42783142, "1996-09-19", "2026-07-04", 8);
+INSERT INTO licenses VALUES (9, 52167430, "1998-08-27", "2027-06-05", 9);
+INSERT INTO licenses VALUES (10, 69128341, "1996-12-25", "2026-08-15", 10);
 
 INSERT INTO employees VALUES (1, "Alejandro", "Saab", 1);
 INSERT INTO employees VALUES (2, "Yae", "Miko", 2);
@@ -141,8 +141,8 @@ ALTER TABLE countries DROP COLUMN capital;
 
 # 10 UPDATE STATEMENTS
 UPDATE passengers SET first_name = "Hannah" WHERE first_name = "Abbie";
-UPDATE flights SET flight_status = "SCHEDULED" WHERE flight_status = "STANDBY";
-UPDATE reservations SET flight_no = 5 WHERE id > 8;
+UPDATE flights SET status = "SCHEDULED" WHERE status = "STANDBY";
+UPDATE reservations SET flight_id = 5 WHERE id > 8;
 UPDATE packages SET name = "Jack Frost" WHERE id = 456;
 UPDATE employees SET first_name = "Hermione", last_name = "Granger" WHERE first_name = "Harry";
 UPDATE employees SET gender = "F" WHERE (id % 2) = 0;
@@ -154,8 +154,8 @@ UPDATE reservations SET price = price * (1.05);
 # 10 DELETION STATEMENTS
 DELETE FROM packages WHERE id < 200;
 DELETE FROM passengers WHERE LEFT(first_name, 1) = 'L';
-DELETE FROM reservations WHERE id NOT IN (SELECT confirmation_no FROM passengers);
-DELETE FROM flights WHERE flight_status = "DELAYED";
+DELETE FROM reservations WHERE id NOT IN (SELECT reservation_id FROM passengers);
+DELETE FROM flights WHERE status = "DELAYED";
 DELETE FROM routes WHERE from_airport = 8 OR to_airport = 8 OR from_airport = 9 OR to_airport = 9;
 DELETE FROM flights WHERE route_id NOT IN (SELECT id FROM routes);
 DELETE FROM airports WHERE id = 8 or id = 9;
@@ -168,8 +168,8 @@ SELECT * from airports
    JOIN countries ON (countries.id = airports.country)
    JOIN routes ON (routes.from_airport = airports.id)
    JOIN flights ON (flights.route_id = routes.id)
-   JOIN reservations ON (reservations.flight_no = flights.id)
-   JOIN passengers ON (passengers.confirmation_no = reservations.id)
+   JOIN reservations ON (reservations.flight_id = flights.id)
+   JOIN passengers ON (passengers.reservation_id = reservations.id)
    JOIN airplanes ON (airplanes.id = flights.airplane_id)
    JOIN packages ON (packages.airplane_id = airplanes.id)
    JOIN employees ON (employees.airplane_id = airplanes.id)
@@ -178,7 +178,7 @@ SELECT * from airports
    JOIN airlines ON (airlines.id = airplanes.airline_id);
 
 # 5 STATEMENTS WITH LEFT, RIGHT, INNER, OUTER JOINS
-SELECT * FROM passengers LEFT JOIN reservations ON passengers.confirmation_no = reservations.id;
+SELECT * FROM passengers LEFT JOIN reservations ON passengers.reservation_id = reservations.id;
 SELECT * FROM airplanes RIGHT JOIN airlines ON airplanes.airline_id = airlines.id;
 SELECT * FROM employees INNER JOIN flights ON employees.airplane_id = flights.airplane_id;
 SELECT * FROM airports LEFT OUTER JOIN countries ON airports.country = countries.id;
@@ -186,18 +186,18 @@ SELECT * FROM employees RIGHT OUTER JOIN licenses ON employees.id = licenses.id;
 
 # 7 STATEMENTS W/ AGGREGATE FUNCTIONS, GROUP BY, AND WITHOUT HAVING
 SELECT last_name, COUNT(last_name) FROM employees GROUP BY last_name;
-SELECT flight_no, MAX(price) FROM reservations GROUP BY flight_no;
+SELECT flight_id, MAX(price) FROM reservations GROUP BY flight_id;
 SELECT SUM(price) FROM reservations;
 SELECT AVG(price) FROM reservations;
 SELECT MAX(price) FROM reservations;
 SELECT MIN(price) FROM reservations;
-SELECT flight_status, COUNT(flight_status) FROM flights GROUP BY flight_status;
+SELECT status, COUNT(status) FROM flights GROUP BY status;
 
 # 7 STATEMENTS W/ AGGREGATE FUNCTIONS, GROUP BY, AND WITH HAVING
 SELECT last_name, COUNT(last_name) FROM employees GROUP BY last_name HAVING LEFT(last_name, 1) >= "M" ORDER BY last_name ASC;
 SELECT capacity, COUNT(capacity) FROM airplanes GROUP BY capacity HAVING capacity = 0;
-SELECT date_log, COUNT(date_log) FROM flights GROUP BY date_log HAVING MONTH(date_log) >= "07" ORDER BY date_log ASC;
+SELECT date, COUNT(date) FROM flights GROUP BY date HAVING MONTH(date) >= "07" ORDER BY date ASC;
 SELECT longitude FROM airports GROUP BY longitude HAVING longitude > 0 ORDER BY longitude ASC;
 SELECT latitude FROM airports GROUP BY latitude HAVING latitude < 0 ORDER BY latitude ASC;
 SELECT brand, COUNT(brand) FROM airplane_types GROUP BY brand HAVING LEFT(brand, 1) <= 'C';
-SELECT flight_no FROM reservations GROUP BY flight_no HAVING flight_no <= 3;
+SELECT flight_id FROM reservations GROUP BY flight_id HAVING flight_id <= 3;
