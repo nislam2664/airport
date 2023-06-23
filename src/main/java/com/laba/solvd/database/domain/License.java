@@ -62,7 +62,7 @@ public class License {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, issued, expired);
+        return Objects.hash(id, certificationNo, issued, expired);
     }
 
     @Override
