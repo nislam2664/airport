@@ -82,6 +82,8 @@ public class Main {
         logger.info("Airline set");
         airplane.setType(airplaneType);
         logger.info("AirplaneType set");
+        airplane.setCapacity(50);
+        logger.info("Capacity set");
         List<Employee> employees = new ArrayList<>();
         employees.add(employee1);
         employees.add(employee2);

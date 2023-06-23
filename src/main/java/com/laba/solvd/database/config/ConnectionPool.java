@@ -1,6 +1,5 @@
 package com.laba.solvd.database.config;
 
-import com.laba.solvd.database.Main;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
