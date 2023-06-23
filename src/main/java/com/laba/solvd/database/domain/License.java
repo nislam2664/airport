@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class License {
     private Integer id;
+    private int certificationNo;
     private LocalDate issued;
     private LocalDate expired;
 
@@ -12,14 +13,19 @@ public class License {
 
     }
 
-    public License(Integer id, LocalDate issued, LocalDate expired) {
+    public License(Integer id, int certificationNo, LocalDate issued, LocalDate expired) {
         this.id = id;
+        this.certificationNo = certificationNo;
         this.issued = issued;
         this.expired = expired;
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public int getCertificationNo() {
+        return certificationNo;
     }
 
     public LocalDate getIssued() {
@@ -32,6 +38,10 @@ public class License {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public void setCertificationNo(int certificationNo) {
+        this.certificationNo = certificationNo;
     }
 
     public void setIssued(LocalDate issued) {
@@ -47,7 +57,7 @@ public class License {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         License license = (License) o;
-        return Objects.equals(id, license.id) && Objects.equals(issued, license.issued) && Objects.equals(expired, license.expired);
+        return Objects.equals(id, license.id) && Objects.equals(certificationNo, license.certificationNo) && Objects.equals(issued, license.issued) && Objects.equals(expired, license.expired);
     }
 
     @Override
@@ -59,6 +69,7 @@ public class License {
     public String toString() {
         return "License{" +
                 "id=" + id +
+                "certificationNo=" + certificationNo +
                 ", issued=" + issued +
                 ", expired=" + expired +
                 '}';
