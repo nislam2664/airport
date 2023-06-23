@@ -69,7 +69,7 @@ public class License {
     public String toString() {
         return "License{" +
                 "id=" + id +
-                "certificationNo=" + certificationNo +
+                ", certificationNo=" + certificationNo +
                 ", issued=" + issued +
                 ", expired=" + expired +
                 '}';
