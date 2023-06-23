@@ -21,16 +21,16 @@ INSERT INTO airplane_types VALUES (8, "Embraer", "E170");
 INSERT INTO airplane_types VALUES (9, "Cessna", "C172");
 INSERT INTO airplane_types VALUES (10, "ATR", "AT75");
 
-INSERT INTO airplanes VALUES (1, 1, 50, 1);
-INSERT INTO airplanes VALUES (2, 131, 50, 1);
-INSERT INTO airplanes VALUES (3, 81, 50, 7);
-INSERT INTO airplanes VALUES (4, 14, 50, 8);
-INSERT INTO airplanes VALUES (5, 20, 50, 6);
-INSERT INTO airplanes VALUES (6, 1, 0, 3);
-INSERT INTO airplanes VALUES (7, 30, 0, 3);
-INSERT INTO airplanes VALUES (8, 1, 0, 5);
-INSERT INTO airplanes VALUES (9, 77, 0, 7);
-INSERT INTO airplanes VALUES (10, 43, 0, 2);
+INSERT INTO airplanes VALUES (1, 1, 1, 50);
+INSERT INTO airplanes VALUES (2, 131, 1, 50);
+INSERT INTO airplanes VALUES (3, 81, 7, 50);
+INSERT INTO airplanes VALUES (4, 14, 8, 50);
+INSERT INTO airplanes VALUES (5, 20, 6, 50);
+INSERT INTO airplanes VALUES (6, 1, 3, 0);
+INSERT INTO airplanes VALUES (7, 30, 3, 0);
+INSERT INTO airplanes VALUES (8, 1, 5, 0);
+INSERT INTO airplanes VALUES (9, 77, 7, 0);
+INSERT INTO airplanes VALUES (10, 43, 2, 0);
 
 INSERT INTO countries VALUES (1, "United States", "USA");
 INSERT INTO countries VALUES (45, "Denmark", "DNK");
@@ -54,17 +54,6 @@ INSERT INTO airports VALUES (8, "Hamad International Airport", "DOH", 974, 25.25
 INSERT INTO airports VALUES (9, "Felipe Angeles International Airport", "NLU", 52, 19.7353, -99.0265);
 INSERT INTO airports VALUES (10, "Naha Airport", "OKA", 81, 24.2064, 127.6465);
 
-INSERT INTO licenses VALUES (1, 12345678, "1999-09-01", "2019-09-22", 1);
-INSERT INTO licenses VALUES (2, 87654321, "1992-04-17", "2026-09-11", 2);
-INSERT INTO licenses VALUES (3, 32987127, "1995-04-05", "2029-09-19", 3);
-INSERT INTO licenses VALUES (4, 51215151, "2019-07-23", "2022-10-01", 4);
-INSERT INTO licenses VALUES (5, 91823791, "1990-01-15", "2023-01-17", 5);
-INSERT INTO licenses VALUES (6, 90347678, "2021-11-05", "2024-02-25", 6);
-INSERT INTO licenses VALUES (7, 76213543, "2003-08-08", "2025-03-29", 7);
-INSERT INTO licenses VALUES (8, 42783142, "1996-09-19", "2026-07-04", 8);
-INSERT INTO licenses VALUES (9, 52167430, "1998-08-27", "2027-06-05", 9);
-INSERT INTO licenses VALUES (10, 69128341, "1996-12-25", "2026-08-15", 10);
-
 INSERT INTO employees VALUES (1, "Alejandro", "Saab", 1);
 INSERT INTO employees VALUES (2, "Yae", "Miko", 2);
 INSERT INTO employees VALUES (4, "Ai", "Hoshino", 4);
@@ -75,6 +64,17 @@ INSERT INTO employees VALUES (7, "Kaeya", "Alberich", 7);
 INSERT INTO employees VALUES (8, "Gwen", "Stacy", 8);
 INSERT INTO employees VALUES (9, "Harry", "Potter", 9);
 INSERT INTO employees VALUES (10, "Putri", "Ariani", 10);
+
+INSERT INTO licenses VALUES (1, 12345678, "1999-09-01", "2019-09-22", 1);
+INSERT INTO licenses VALUES (2, 87654321, "1992-04-17", "2026-09-11", 2);
+INSERT INTO licenses VALUES (3, 32987127, "1995-04-05", "2029-09-19", 3);
+INSERT INTO licenses VALUES (4, 51215151, "2019-07-23", "2022-10-01", 4);
+INSERT INTO licenses VALUES (5, 91823791, "1990-01-15", "2023-01-17", 5);
+INSERT INTO licenses VALUES (6, 90347678, "2021-11-05", "2024-02-25", 6);
+INSERT INTO licenses VALUES (7, 76213543, "2003-08-08", "2025-03-29", 7);
+INSERT INTO licenses VALUES (8, 42783142, "1996-09-19", "2026-07-04", 8);
+INSERT INTO licenses VALUES (9, 52167430, "1998-08-27", "2027-06-05", 9);
+INSERT INTO licenses VALUES (10, 69128341, "1996-12-25", "2026-08-15", 10);
 
 INSERT INTO routes VALUES (1, 1, 2, "12:30:00", "01:25:00");
 INSERT INTO routes VALUES (2, 3, 4, "10:30:00", "02:25:00");
@@ -145,8 +145,8 @@ UPDATE flights SET status = "SCHEDULED" WHERE status = "STANDBY";
 UPDATE reservations SET flight_id = 5 WHERE id > 8;
 UPDATE packages SET name = "Jack Frost" WHERE id = 456;
 UPDATE employees SET first_name = "Hermione", last_name = "Granger" WHERE first_name = "Harry";
-UPDATE employees SET gender = "F" WHERE (id % 2) = 0;
-UPDATE employees SET gender = "M" WHERE (id % 2) > 0;
+UPDATE employees SET first_name = "Ruby" WHERE first_name = "Ai";
+UPDATE flights SET status = "STANDBY" WHERE id = 4;
 UPDATE countries SET code = "KHR" WHERE name = "Khazar";
 UPDATE airplane_types SET brand = "Boeing" WHERE brand = "Bloop";
 UPDATE reservations SET price = price * (1.05);
@@ -159,13 +159,13 @@ DELETE FROM flights WHERE status = "DELAYED";
 DELETE FROM routes WHERE from_airport = 8 OR to_airport = 8 OR from_airport = 9 OR to_airport = 9;
 DELETE FROM flights WHERE route_id NOT IN (SELECT id FROM routes);
 DELETE FROM airports WHERE id = 8 or id = 9;
-DELETE FROM countries WHERE id NOT IN (SELECT country FROM airports);
+DELETE FROM countries WHERE id NOT IN (SELECT country_id FROM airports);
 DELETE FROM airlines WHERE id NOT IN (SELECT airline_id FROM airplanes);
 DELETE FROM airplane_types WHERE id NOT IN (SELECT type_id FROM airplanes);
 
 # 1 BIG JOIN STATEMENT FOR ALL TABLES
 SELECT * from airports
-   JOIN countries ON (countries.id = airports.country)
+   JOIN countries ON (countries.id = airports.country_id)
    JOIN routes ON (routes.from_airport = airports.id)
    JOIN flights ON (flights.route_id = routes.id)
    JOIN reservations ON (reservations.flight_id = flights.id)
@@ -181,7 +181,7 @@ SELECT * from airports
 SELECT * FROM passengers LEFT JOIN reservations ON passengers.reservation_id = reservations.id;
 SELECT * FROM airplanes RIGHT JOIN airlines ON airplanes.airline_id = airlines.id;
 SELECT * FROM employees INNER JOIN flights ON employees.airplane_id = flights.airplane_id;
-SELECT * FROM airports LEFT OUTER JOIN countries ON airports.country = countries.id;
+SELECT * FROM airports LEFT OUTER JOIN countries ON airports.country_id = countries.id;
 SELECT * FROM employees RIGHT OUTER JOIN licenses ON employees.id = licenses.id;
 
 # 7 STATEMENTS W/ AGGREGATE FUNCTIONS, GROUP BY, AND WITHOUT HAVING
