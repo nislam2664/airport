@@ -26,7 +26,7 @@ public class ConnectionPool {
             driver = Config.DRIVER.getValue();
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
-            logger.error("Unable to find driver!", e);
+            logger.error("Unable to find driver", e);
         }
 
         url = Config.URL.getValue();
@@ -66,7 +66,6 @@ public class ConnectionPool {
     }
 
     public synchronized void releaseConnection(Connection connection) {
-        if(connection != null)
-            connectionPool.add(connection);
+        connectionPool.add(connection);
     }
 }
