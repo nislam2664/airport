@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laba.solvd.database.persistence.AirplaneTypeRepository">
+    <insert id="create">
+        INSERT INTO airplane_types (brand, model) VALUES (#{brand}, #{model});
+    </insert>
+
+    <update id="update">
+        UPDATE airplane_types SET brand = #{brand}, model = #{model} WHERE id = #{id};
+    </update>
+
+    <delete id="delete">
+        DELETE FROM airplane_types WHERE id = #{id};
+    </delete>
+
+    <select id="read" resultMap="typeResultMap">
+        SELECT * FROM airplane_types WHERE id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="typeResultMap">
+        SELECT * FROM airplane_types;
+    </select>
+
+    <resultMap id="typeResultMap" type="com.laba.solvd.database.domain.AirplaneType" autoMapping="false">
+        <result property="id" column="id"/>
+        <result property="brand" column="brand"/>
+        <result property="model" column="model"/>
+    </resultMap>
+</mapper>

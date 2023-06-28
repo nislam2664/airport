@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laba.solvd.database.persistence.LicenseRepository">
+    <insert id="create">
+        INSERT INTO licenses (certification_no, issued, expired) VALUES (#{certification_no}, #{issued}, #{expired});
+    </insert>
+
+    <update id="update">
+        UPDATE licenses SET certification_no = #{certification_no}, issued = #{issued}, expired = #{expired} WHERE id = #{id};
+    </update>
+
+    <delete id="delete">
+        DELETE FROM licenses WHERE id = #{id};
+    </delete>
+
+    <select id="read" resultMap="licenseResultMap">
+        SELECT * FROM licenses WHERE id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="licenseResultMap">
+        SELECT * FROM licenses;
+    </select>
+
+    <resultMap id="licenseResultMap" type="com.laba.solvd.database.domain.License" autoMapping="false">
+        <result property="id" column="id"/>
+        <result property="certificationNo" column="certification_no"/>
+        <result property="issued" column="issued"/>
+        <result property="expired" column="expired"/>
+    </resultMap>
+</mapper>

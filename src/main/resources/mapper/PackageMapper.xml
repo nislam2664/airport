@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laba.solvd.database.persistence.PackageRepository">
+    <insert id="create">
+        INSERT INTO packages (name, address) VALUES (#{name}, #{address});
+    </insert>
+
+    <update id="update">
+        UPDATE packages SET name = #{name}, address = #{address} WHERE id = #{id};
+    </update>
+
+    <delete id="delete">
+        DELETE FROM packages WHERE id = #{id};
+    </delete>
+
+    <select id="read" resultMap="packageResultMap">
+        SELECT * FROM packages WHERE id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="packageResultMap">
+        SELECT * FROM packages;
+    </select>
+
+    <resultMap id="packageResultMap" type="com.laba.solvd.database.domain.Package" autoMapping="false">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="address" column="address"/>
+    </resultMap>
+</mapper>

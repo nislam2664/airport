@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laba.solvd.database.persistence.AirplaneRepository">
+    <insert id="create">
+        INSERT INTO airplanes (capacity) VALUES (#{capacity});
+    </insert>
+
+    <update id="update">
+        UPDATE airplanes SET capacity = #{capacity} WHERE id = #{id};
+    </update>
+
+    <delete id="delete">
+        DELETE FROM airplanes WHERE id = #{id};
+    </delete>
+
+    <select id="read" resultMap="airplaneResult">
+        SELECT * FROM airplanes WHERE id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="airplaneResult">
+        SELECT airplanes.id AS airplane_id, airlines.id AS airline_id, airlines.name AS airline_name, airlines.code AS airline_code,
+        airplane_types.id AS type_id, airplane_types.brand AS type_brand, airplane_types.model AS type_model,
+        airplanes.capacity AS airplane_capacity, employees.id AS employee_id, employees.first_name AS employee_first_name,
+        employees.last_name AS employee_last_name, packages.id AS package_id, packages.name AS package_name,
+        packages.address AS package_address FROM airplanes
+        LEFT JOIN airlines ON airline.airplane_id = airplanes.id
+        LEFT JOIN airplane_types ON airplane_types.airplane_id = airplanes.id
+        LEFT JOIN employees ON employees.airplane_id = airplanes.id
+        LEFT JOIN packages ON packages.airplane_id = airplanes.id;
+    </select>
+
+    <select id="getPackagesByAirplaneId" resultMap="com.laba.solvd.database.persistence.PackageRepository.packageResultMap">
+        SELECT packages.id AS package_id, packages.name AS package_name, packages.address AS package_address FROM airplanes LEFT JOIN packages ON packages.airplane_id = airplanes.id WHERE airplanes.id = #{id};
+    </select>
+
+    <select id="getEmployeesByAirplaneId" resultMap="com.laba.solvd.database.persistence.EmployeeRepository.employeeResultMap">
+        SELECT employees.id AS employee_id, employees.first_name AS employee_first_name, employees.last_name AS employee_last_name FROM airplanes LEFT JOIN employees ON employees.airplane_id = airplanes.id WHERE airplanes.id = #{id};
+    </select>
+
+    <resultMap id="airplaneResult" type="com.laba.solvd.database.domain.Airplane" autoMapping="false">
+        <id property="id" column="id"/>
+        <association property="airline" columnPrefix="airline_" resultMap="com.laba.solvd.database.persistence.AirlineRepository.airlineResultMap"/>
+        <association property="type" columnPrefix="type_" resultMap="com.laba.solvd.database.persistence.AirplaneTypeRepository.typeResultMap"/>
+        <result property="capacity" column="capacity"/>
+        <collection property="packages" ofType="com.laba.solvd.database.domain.Package">
+            <id property="id" column="package_id"/>
+            <result property="name" column="package_name"/>
+            <result property="address" column="package_address"/>
+        </collection>
+        <collection property="employees" ofType="com.laba.solvd.database.domain.Employee">
+            <id property="id" column="employee_id"/>
+            <result property="firstName" column="employee_first_name"/>
+            <result property="lastName" column="employee_last_name"/>
+        </collection>
+    </resultMap>
+</mapper>

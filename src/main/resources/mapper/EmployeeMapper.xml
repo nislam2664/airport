@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laba.solvd.database.persistence.EmployeeRepository">
+    <insert id="create">
+        INSERT INTO employees (first_name, last_name) VALUES (#{first_name}, #{last_name});
+    </insert>
+
+    <update id="update">
+        UPDATE employees SET first_name = #{first_name}, last_name = #{last_name} WHERE id = #{id};
+    </update>
+
+    <delete id="delete">
+        DELETE FROM employees WHERE id = #{id};
+    </delete>
+
+    <select id="read" resultMap="employeeResultMap">
+        SELECT * FROM employees WHERE id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="employeeResultMap">
+        SELECT employees.id AS employee_id, employees.first_name AS employee_first_name, employees.last_name AS employee_last_name,
+        licenses.id AS license_id, licenses.certification_no AS license_certification_no, licenses.issued AS license_issued,
+        licenses.expired AS license_expired FROM employees
+        LEFT JOIN licenses ON employees.id = licenses.employee_id;
+    </select>
+
+    <resultMap id="employeeResultMap" type="com.laba.solvd.database.domain.Employee" autoMapping="false">
+        <result property="id" column="employee_id"/>
+        <result property="firstName" column="employee_first_name"/>
+        <result property="lastName" column="employee_last_name"/>
+        <association property="license" columnPrefix="license_" resultMap="com.laba.solvd.database.persistence.LicenseRepository.licenseResultMap"/>
+    </resultMap>
+</mapper>

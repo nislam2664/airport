@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laba.solvd.database.persistence.AirlineRepository">
+    <insert id="create">
+        INSERT INTO airlines (name, code) VALUES (#{name}, #{code});
+    </insert>
+
+    <update id="update">
+        UPDATE airlines SET name = #{name}, code = #{code} WHERE id = #{id};
+    </update>
+
+    <delete id="delete">
+        DELETE FROM airlines WHERE id = #{id};
+    </delete>
+
+    <select id="read" resultMap="airlineResultMap">
+        SELECT * FROM airlines WHERE id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="airlineResultMap">
+        SELECT * FROM airlines;
+    </select>
+
+    <resultMap id="airlineResultMap" type="com.laba.solvd.database.domain.Airline" autoMapping="false">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="code" column="code"/>
+    </resultMap>
+</mapper>
