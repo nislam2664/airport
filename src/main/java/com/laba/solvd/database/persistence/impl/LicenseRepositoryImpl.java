@@ -1,5 +1,6 @@
 package com.laba.solvd.database.persistence.impl;
 
+import com.laba.solvd.database.Main;
 import com.laba.solvd.database.config.ConnectionPool;
 import com.laba.solvd.database.domain.Employee;
 import com.laba.solvd.database.domain.License;

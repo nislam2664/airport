@@ -1,10 +1,10 @@
 package com.laba.solvd.database.persistence.impl;
 
+import com.laba.solvd.database.Main;
 import com.laba.solvd.database.config.ConnectionPool;
 import com.laba.solvd.database.domain.Airplane;
 import com.laba.solvd.database.domain.AirplaneType;
 import com.laba.solvd.database.persistence.AirplaneTypeRepository;
-import com.laba.solvd.database.persistence.DaoRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
