@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Confi 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/airport"/>
+                <property name="username" value="root"/>
+                <property name="password" value="Raspberry876"/>
+                <property name="poolMaximumActiveConnections" value="5"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="mapper/AirlineMapper.xml"/>
+        <mapper resource="mapper/AirplaneMapper.xml"/>
+        <mapper resource="mapper/AirplaneTypeMapper.xml"/>
+        <mapper resource="mapper/EmployeeMapper.xml"/>
+        <mapper resource="mapper/LicenseMapper.xml"/>
+        <mapper resource="mapper/PackageMapper.xml"/>
+    </mappers>
+</configuration>
