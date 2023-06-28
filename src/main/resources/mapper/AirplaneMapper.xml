@@ -13,11 +13,11 @@
         DELETE FROM airplanes WHERE id = #{id};
     </delete>
 
-    <select id="read" resultMap="airplaneResult">
-        SELECT * FROM airplanes WHERE id = #{id};
+    <select id="read" resultMap="airplaneResultMap">
+        SELECT id, capacity FROM airplanes WHERE id = #{id};
     </select>
 
-    <select id="getAll" resultMap="airplaneResult">
+    <select id="getAll" resultMap="airplaneResultMap">
         SELECT airplanes.id AS airplane_id, airlines.id AS airline_id, airlines.name AS airline_name, airlines.code AS airline_code,
         airplane_types.id AS type_id, airplane_types.brand AS type_brand, airplane_types.model AS type_model,
         airplanes.capacity AS airplane_capacity, employees.id AS employee_id, employees.first_name AS employee_first_name,
@@ -37,7 +37,7 @@
         SELECT employees.id AS employee_id, employees.first_name AS employee_first_name, employees.last_name AS employee_last_name FROM airplanes LEFT JOIN employees ON employees.airplane_id = airplanes.id WHERE airplanes.id = #{id};
     </select>
 
-    <resultMap id="airplaneResult" type="com.laba.solvd.database.domain.Airplane" autoMapping="false">
+    <resultMap id="airplaneResultMap" type="com.laba.solvd.database.domain.Airplane" autoMapping="false">
         <id property="id" column="id"/>
         <association property="airline" columnPrefix="airline_" resultMap="com.laba.solvd.database.persistence.AirlineRepository.airlineResultMap"/>
         <association property="type" columnPrefix="type_" resultMap="com.laba.solvd.database.persistence.AirplaneTypeRepository.typeResultMap"/>

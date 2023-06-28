@@ -8,11 +8,17 @@ import com.laba.solvd.database.persistence.impl.*;
 import com.laba.solvd.database.persistence.mapper.AirlineMapperImpl;
 import com.laba.solvd.database.persistence.mapper.AirplaneMapperImpl;
 import com.laba.solvd.database.services.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.laba.solvd.database.Main.connectionFactory;
+
 public class AirplaneServiceImpl implements AirplaneService {
+    private static final Logger logger = LogManager.getLogger(AirplaneServiceImpl.class.getName());
+
     private final AirplaneRepository airplaneRepository;
     private final AirlineService airlineService;
     private final AirplaneTypeService airplaneTypeService;
@@ -20,10 +26,14 @@ public class AirplaneServiceImpl implements AirplaneService {
     private final EmployeeService employeeService;
 
     public AirplaneServiceImpl() {
-        if (ConnectionMethodFactory.isPool())
+        if (!connectionFactory.isMyBatis()) {
             this.airplaneRepository = new AirplaneRepositoryImpl();
-        else
+            logger.info("Using JDBC Airplane repository");
+        }
+        else {
             this.airplaneRepository = new AirplaneMapperImpl();
+            logger.info("Using MyBatis Airplane mapper");
+        }
 
         this.airlineService = new AirlineServiceImpl();
         this.airplaneTypeService = new AirplaneTypeServiceImpl();
@@ -34,7 +44,6 @@ public class AirplaneServiceImpl implements AirplaneService {
     @Override
     public Airplane create(Airplane airplane) {
         airplane.setId(null);
-        airplaneRepository.create(airplane);
 
         if (airplane.getAirline() != null) {
             Airline airline = airlineService.create(airplane.getAirline());
@@ -55,6 +64,8 @@ public class AirplaneServiceImpl implements AirplaneService {
             List<Employee> employees = airplane.getEmployees().stream().map(employeeService::create).collect(Collectors.toList());
             airplane.setEmployees(employees);
         }
+
+        airplaneRepository.create(airplane);
 
         return airplane;
     }

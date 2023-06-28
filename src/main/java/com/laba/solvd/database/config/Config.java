@@ -1,5 +1,9 @@
 package com.laba.solvd.database.config;
 
+import com.laba.solvd.database.Main;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -9,7 +13,10 @@ public enum Config {
     URL("url"),
     USERNAME("username"),
     PASSWORD("password"),
-    POOL_SIZE("pool_size");
+    POOL_SIZE("pool_size"),
+    CONNECTION_METHOD("connection_method");
+
+    private static final Logger logger = LogManager.getLogger(Config.class.getName());
 
     private final String key;
     private String value;
@@ -21,7 +28,8 @@ public enum Config {
         try (FileInputStream fis = new FileInputStream(file)) {
             properties.load(fis);
         } catch (IOException e) {
-            throw new RuntimeException("Unable to configure database connection");
+            logger.error("Unable to configure database connection", e);
+            throw new RuntimeException();
         }
     }
 

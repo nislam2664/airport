@@ -2,7 +2,6 @@ package com.laba.solvd.database;
 
 import com.laba.solvd.database.domain.*;
 import com.laba.solvd.database.domain.Package;
-import com.laba.solvd.database.factory.ConnectionMethod;
 import com.laba.solvd.database.factory.ConnectionMethodFactory;
 import com.laba.solvd.database.services.AirplaneService;
 import com.laba.solvd.database.services.impl.AirplaneServiceImpl;
@@ -15,11 +14,9 @@ import java.util.List;
 
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class.getName());
-    public static ConnectionMethod connectionMethod;
+    public static ConnectionMethodFactory connectionFactory = new ConnectionMethodFactory();
 
     public static void main(String[] args) {
-        String method = "MyBatis";
-        connectionMethod = ConnectionMethodFactory.getMethod(method);
 
         Airplane airplane = new Airplane();
         logger.warn("Empty Airplane object created");

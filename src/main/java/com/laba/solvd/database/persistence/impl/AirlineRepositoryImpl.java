@@ -23,7 +23,7 @@ public class AirlineRepositoryImpl implements AirlineRepository {
 
     private String SET_AIRLINE = "INSERT INTO airlines (id, airplane_id) VALUES (?, ?)";
 
-    private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
+    private final ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
 
     @Override
     public void create(Airline airline) {

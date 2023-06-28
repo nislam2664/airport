@@ -9,14 +9,13 @@
                 <property name="url" value="${url}"/>
                 <property name="username" value="${username}"/>
                 <property name="password" value="${password}"/>
-                <property name="poolMaximumActiveConnections" value="${pool_size}"/>
             </dataSource>
         </environment>
     </environments>
 
     <mappers>
         <mapper resource="mapper/AirlineMapper.xml"/>
-        <mapper resource="mapper/AirplaneMapper.xml"/>
+        <!--<mapper resource="mapper/AirplaneMapper.xml"/>-->
         <mapper resource="mapper/AirplaneTypeMapper.xml"/>
         <mapper resource="mapper/EmployeeMapper.xml"/>
         <mapper resource="mapper/LicenseMapper.xml"/>

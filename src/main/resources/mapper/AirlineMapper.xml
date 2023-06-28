@@ -14,11 +14,11 @@
     </delete>
 
     <select id="read" resultMap="airlineResultMap">
-        SELECT * FROM airlines WHERE id = #{id};
+        SELECT id, name, code FROM airlines WHERE id = #{id}; --> use column names, not *
     </select>
 
     <select id="getAll" resultMap="airlineResultMap">
-        SELECT * FROM airlines;
+        SELECT id, name, code FROM airlines;
     </select>
 
     <resultMap id="airlineResultMap" type="com.laba.solvd.database.domain.Airline" autoMapping="false">

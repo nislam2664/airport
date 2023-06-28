@@ -14,11 +14,11 @@
     </delete>
 
     <select id="read" resultMap="typeResultMap">
-        SELECT * FROM airplane_types WHERE id = #{id};
+        SELECT id, brand, model FROM airplane_types WHERE id = #{id};
     </select>
 
     <select id="getAll" resultMap="typeResultMap">
-        SELECT * FROM airplane_types;
+        SELECT id, brand, model FROM airplane_types;
     </select>
 
     <resultMap id="typeResultMap" type="com.laba.solvd.database.domain.AirplaneType" autoMapping="false">

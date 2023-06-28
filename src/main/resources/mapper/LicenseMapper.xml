@@ -14,11 +14,11 @@
     </delete>
 
     <select id="read" resultMap="licenseResultMap">
-        SELECT * FROM licenses WHERE id = #{id};
+        SELECT id, certification_no, issued, expired FROM licenses WHERE id = #{id};
     </select>
 
     <select id="getAll" resultMap="licenseResultMap">
-        SELECT * FROM licenses;
+        SELECT id, certification_no, issued, expired FROM licenses;
     </select>
 
     <resultMap id="licenseResultMap" type="com.laba.solvd.database.domain.License" autoMapping="false">

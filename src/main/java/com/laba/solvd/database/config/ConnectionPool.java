@@ -1,8 +1,6 @@
 package com.laba.solvd.database.config;
 
-import com.laba.solvd.database.Main;
 import com.laba.solvd.database.factory.ConnectionMethod;
-import com.laba.solvd.database.factory.ConnectionMethodFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,6 +9,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.stream.IntStream;
+
+import static com.laba.solvd.database.Main.connectionFactory;
 
 public class ConnectionPool implements ConnectionMethod {
     private static final Logger logger = LogManager.getLogger(ConnectionPool.class.getName());
@@ -47,8 +47,8 @@ public class ConnectionPool implements ConnectionMethod {
     }
 
     public static synchronized ConnectionPool getInstance() {
-        if (INSTANCE == null && ConnectionMethodFactory.isPool())
-            INSTANCE = (ConnectionPool) Main.connectionMethod;
+        if (INSTANCE == null && !connectionFactory.isMyBatis())
+                INSTANCE = (ConnectionPool) connectionFactory.getMethod();
         return INSTANCE;
     }
 

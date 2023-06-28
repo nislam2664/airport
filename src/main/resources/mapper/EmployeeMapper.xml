@@ -14,7 +14,7 @@
     </delete>
 
     <select id="read" resultMap="employeeResultMap">
-        SELECT * FROM employees WHERE id = #{id};
+        SELECT id, first_name, last_name FROM employees WHERE id = #{id};
     </select>
 
     <select id="getAll" resultMap="employeeResultMap">
