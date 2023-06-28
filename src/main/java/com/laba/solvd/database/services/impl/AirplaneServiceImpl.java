@@ -2,8 +2,11 @@ package com.laba.solvd.database.services.impl;
 
 import com.laba.solvd.database.domain.*;
 import com.laba.solvd.database.domain.Package;
+import com.laba.solvd.database.factory.ConnectionMethodFactory;
 import com.laba.solvd.database.persistence.*;
 import com.laba.solvd.database.persistence.impl.*;
+import com.laba.solvd.database.persistence.mapper.AirlineMapperImpl;
+import com.laba.solvd.database.persistence.mapper.AirplaneMapperImpl;
 import com.laba.solvd.database.services.*;
 
 import java.util.List;
@@ -17,7 +20,11 @@ public class AirplaneServiceImpl implements AirplaneService {
     private final EmployeeService employeeService;
 
     public AirplaneServiceImpl() {
-        this.airplaneRepository = new AirplaneRepositoryImpl();
+        if (ConnectionMethodFactory.isPool())
+            this.airplaneRepository = new AirplaneRepositoryImpl();
+        else
+            this.airplaneRepository = new AirplaneMapperImpl();
+
         this.airlineService = new AirlineServiceImpl();
         this.airplaneTypeService = new AirplaneTypeServiceImpl();
         this.packageService = new PackageServiceImpl();

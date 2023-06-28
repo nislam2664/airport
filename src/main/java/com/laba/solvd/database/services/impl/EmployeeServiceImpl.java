@@ -2,8 +2,12 @@ package com.laba.solvd.database.services.impl;
 
 import com.laba.solvd.database.domain.Employee;
 import com.laba.solvd.database.domain.License;
+import com.laba.solvd.database.factory.ConnectionMethodFactory;
 import com.laba.solvd.database.persistence.EmployeeRepository;
+import com.laba.solvd.database.persistence.impl.AirplaneTypeRepositoryImpl;
 import com.laba.solvd.database.persistence.impl.EmployeeRepositoryImpl;
+import com.laba.solvd.database.persistence.mapper.AirplaneTypeMapperImpl;
+import com.laba.solvd.database.persistence.mapper.EmployeeMapperImpl;
 import com.laba.solvd.database.services.EmployeeService;
 import com.laba.solvd.database.services.LicenseService;
 
@@ -14,7 +18,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final LicenseService licenseService;
 
     public EmployeeServiceImpl() {
-        this.employeeRepository = new EmployeeRepositoryImpl();
+        if (ConnectionMethodFactory.isPool())
+            this.employeeRepository = new EmployeeRepositoryImpl();
+        else
+            this.employeeRepository = new EmployeeMapperImpl();
         this.licenseService = new LicenseServiceImpl();
     }
 

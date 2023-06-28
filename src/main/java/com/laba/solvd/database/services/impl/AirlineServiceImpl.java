@@ -1,8 +1,10 @@
 package com.laba.solvd.database.services.impl;
 
 import com.laba.solvd.database.domain.Airline;
+import com.laba.solvd.database.factory.ConnectionMethodFactory;
 import com.laba.solvd.database.persistence.AirlineRepository;
 import com.laba.solvd.database.persistence.impl.AirlineRepositoryImpl;
+import com.laba.solvd.database.persistence.mapper.AirlineMapperImpl;
 import com.laba.solvd.database.services.AirlineService;
 
 import java.util.List;
@@ -11,7 +13,10 @@ public class AirlineServiceImpl implements AirlineService {
     private final AirlineRepository airlineRepository;
 
     public AirlineServiceImpl() {
-        this.airlineRepository = new AirlineRepositoryImpl();
+        if (ConnectionMethodFactory.isPool())
+            this.airlineRepository = new AirlineRepositoryImpl();
+        else
+            this.airlineRepository = new AirlineMapperImpl();
     }
 
     @Override
