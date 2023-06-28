@@ -1,5 +1,8 @@
 package com.laba.solvd.database.config;
 
+import com.laba.solvd.database.Main;
+import com.laba.solvd.database.factory.ConnectionMethod;
+import com.laba.solvd.database.factory.ConnectionMethodFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,11 +12,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.stream.IntStream;
 
-public class ConnectionPool {
+public class ConnectionPool implements ConnectionMethod {
     private static final Logger logger = LogManager.getLogger(ConnectionPool.class.getName());
 
     private static ConnectionPool INSTANCE;
-    private final ArrayList<Connection> connectionPool;
+    private ArrayList<Connection> connectionPool;
 
     private String driver;
     private String url;
@@ -22,6 +25,11 @@ public class ConnectionPool {
     private int poolSize;
 
     public ConnectionPool() {
+        initialize();
+    }
+
+    @Override
+    public void initialize() {
         try {
             driver = Config.DRIVER.getValue();
             Class.forName(driver);
@@ -39,8 +47,8 @@ public class ConnectionPool {
     }
 
     public static synchronized ConnectionPool getInstance() {
-        if (INSTANCE == null)
-            INSTANCE = new ConnectionPool();
+        if (INSTANCE == null && ConnectionMethodFactory.isPool())
+            INSTANCE = (ConnectionPool) Main.connectionMethod;
         return INSTANCE;
     }
 
