@@ -15,7 +15,7 @@
 
     <mappers>
         <mapper resource="mapper/AirlineMapper.xml"/>
-        <!--<mapper resource="mapper/AirplaneMapper.xml"/>-->
+        <mapper resource="mapper/AirplaneMapper.xml"/>
         <mapper resource="mapper/AirplaneTypeMapper.xml"/>
         <mapper resource="mapper/EmployeeMapper.xml"/>
         <mapper resource="mapper/LicenseMapper.xml"/>
